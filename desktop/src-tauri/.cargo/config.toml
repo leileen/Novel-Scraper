@@ -1,0 +1,7 @@
+[target.x86_64-pc-windows-msvc]
+linker = "C:/Program Files/Rust stable MSVC 1.99/lib/rustlib/x86_64-pc-windows-msvc/bin/rust-lld.exe"
+rustflags = [
+  "-Lnative=D:/Project/Novel Scraper/.xwin/crt/lib/x86_64",
+  "-Lnative=D:/Project/Novel Scraper/.xwin/sdk/lib/um/x86_64",
+  "-Lnative=D:/Project/Novel Scraper/.xwin/sdk/lib/ucrt/x86_64"
+]

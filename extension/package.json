@@ -1,0 +1,40 @@
+{
+  "name": "novel-scraper",
+  "version": "1.1.0",
+  "description": "Universal Novel Scraper Side Panel Extension for Chrome, Edge, and Firefox",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wxt",
+    "dev:firefox": "wxt -b firefox",
+    "build": "wxt build -b chrome && wxt build -b edge",
+    "build:chrome": "wxt build -b chrome",
+    "build:edge": "wxt build -b edge",
+    "build:firefox": "wxt build -b firefox --mv3",
+    "build:all": "wxt build -b chrome && wxt build -b edge && wxt build -b firefox --mv3",
+    "zip": "wxt zip",
+    "zip:chrome": "wxt zip -b chrome",
+    "zip:firefox": "wxt zip -b firefox --mv3 --sources",
+    "zip:edge": "wxt zip -b edge",
+    "zip:all": "wxt zip -b chrome && wxt zip -b firefox --mv3 --sources && wxt zip -b edge",
+    "test": "vitest run",
+    "check": "wxt prepare && tsc --noEmit"
+  },
+  "dependencies": {
+    "@lucide/svelte": "^1.66.0",
+    "dexie": "^4.4.7",
+    "docx": "^9.15.1",
+    "jspdf": "^4.2.1",
+    "svelte": "^5.57.3"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.300",
+    "@types/node": "^22.10.1",
+    "@wxt-dev/module-svelte": "^2.0.5",
+    "happy-dom": "^21.0.4",
+    "sharp": "^0.35.5",
+    "typescript": "^5.7.2",
+    "vitest": "^3.0.0",
+    "wxt": "^0.21.5"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true
+  },
+  "include": [
+    ".wxt/wxt.d.ts",
+    "entrypoints/**/*",
+    "components/**/*",
+    "lib/**/*",
+    "wxt.config.ts"
+  ]
+}

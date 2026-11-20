@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Novel Scraper - Hướng Dẫn Update & Nộp 3 Store</title>
+  <style>
+    :root {
+      --bg: #0B1120;
+      --card-bg: #131E36;
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-hover: rgba(0, 210, 255, 0.25);
+      --text: #F8FAFC;
+      --text-muted: #94A3B8;
+      --accent-chrome: #00D2FF;
+      --accent-edge: #0078D4;
+      --accent-firefox: #FF7139;
+      --success: #10B981;
+      --warning: #F59E0B;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 24px 16px 90px;
+    }
+
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 800;
+      background: linear-gradient(90deg, #FFFFFF, #00D2FF);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    /* Prep Banner */
+    .prep-box {
+      background: rgba(16, 185, 129, 0.06);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin-bottom: 24px;
+    }
+
+    .prep-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .prep-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #34D399;
+    }
+
+    .prep-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .prep-step {
+      background: rgba(0, 0, 0, 0.28);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 12.5px;
+    }
+
+    .prep-step strong {
+      color: #E2E8F0;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .prep-step code {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-family: Consolas, monospace;
+      color: #38BDF8;
+      font-size: 11.5px;
+    }
+
+    .cmd-block {
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-family: Consolas, monospace;
+      font-size: 12px;
+      color: #E2E8F0;
+      white-space: pre-wrap;
+      margin-top: 8px;
+    }
+
+    /* Store Switcher Tabs */
+    .store-tabs {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .store-tab-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 30px;
+      border: 1px solid var(--card-border);
+      background: var(--card-bg);
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .store-tab-btn:hover {
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .store-tab-btn.active.chrome {
+      background: rgba(0, 210, 255, 0.15);
+      border-color: var(--accent-chrome);
+      color: var(--accent-chrome);
+      box-shadow: 0 0 16px rgba(0, 210, 255, 0.25);
+    }
+
+    .store-tab-btn.active.edge {
+      background: rgba(0, 120, 212, 0.15);
+      border-color: var(--accent-edge);
+      color: #60A5FA;
+      box-shadow: 0 0 16px rgba(0, 120, 212, 0.25);
+    }
+
+    .store-tab-btn.active.firefox {
+      background: rgba(255, 113, 57, 0.15);
+      border-color: var(--accent-firefox);
+      color: var(--accent-firefox);
+      box-shadow: 0 0 16px rgba(255, 113, 57, 0.25);
+    }
+
+    /* Language Switcher */
+    .lang-switcher {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .lang-btn {
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: 1px solid var(--card-border);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-muted);
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .lang-btn.active {
+      background: #FFFFFF;
+      color: #070B14;
+      border-color: #FFFFFF;
+    }
+
+    /* Content Pane */
+    .store-panel {
+      display: none;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .store-panel.active {
+      display: flex;
+    }
+
+    .lang-content {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Checklist Guide */
+    .guide-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      padding: 18px;
+    }
+
+    .guide-title {
+      font-size: 15.5px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .portal-link {
+      font-size: 12px;
+      color: #38BDF8;
+      text-decoration: none;
+      background: rgba(56, 189, 248, 0.12);
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .portal-link:hover {
+      background: rgba(56, 189, 248, 0.22);
+    }
+
+    .checklist {
+      list-style: none;
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: #E2E8F0;
+      background: rgba(0, 0, 0, 0.22);
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .checklist input[type="checkbox"] {
+      margin-top: 3px;
+      accent-color: var(--success);
+      width: 15px;
+      height: 15px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .checklist li.done {
+      opacity: 0.55;
+      text-decoration: line-through;
+    }
+
+    .checklist code {
+      background: rgba(255, 255, 255, 0.09);
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-family: Consolas, monospace;
+      color: #38BDF8;
+      font-size: 11.5px;
+    }
+
+    /* Card Item */
+    .field-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: border-color 0.2s;
+    }
+
+    .field-card:hover {
+      border-color: var(--card-hover);
+    }
+
+    .field-card.highlight-new {
+      border-color: rgba(245, 158, 11, 0.45);
+      background: rgba(245, 158, 11, 0.05);
+    }
+
+    .field-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .field-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #E2E8F0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .badge-new {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #FBBF24;
+      background: rgba(245, 158, 11, 0.16);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      padding: 1px 8px;
+      border-radius: 10px;
+    }
+
+    .char-limit {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      background: rgba(0, 0, 0, 0.3);
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+
+    .btn-copy {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-copy:hover {
+      background: var(--accent-chrome);
+      border-color: var(--accent-chrome);
+      color: #0B1120;
+    }
+
+    .btn-copy.copied {
+      background: var(--success);
+      border-color: var(--success);
+      color: #fff;
+    }
+
+    .field-content {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 12px 14px;
+      color: #F1F5F9;
+      font-size: 13px;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-family: inherit;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .section-banner {
+      border-radius: 12px;
+      padding: 14px 18px;
+      font-size: 12.5px;
+      color: #CBD5E1;
+    }
+
+    .assets-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 12px;
+      margin-top: 4px;
+    }
+
+    .asset-item {
+      background: rgba(0, 0, 0, 0.28);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+
+    .asset-title {
+      font-weight: 700;
+      color: #38BDF8;
+      margin-bottom: 2px;
+    }
+
+    .asset-path {
+      font-family: Consolas, monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--success);
+      color: #fff;
+      padding: 10px 24px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 9999;
+    }
+
+    #toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Novel Scraper — Hướng Dẫn Update &amp; Nộp 3 Store</h1>
+      <p class="subtitle">Quy trình build bản cập nhật, danh sách kiểm tra từng bước &amp; các ô Copy-Paste mới nhất (Chrome · Edge · Firefox AMO)</p>
+    </header>
+
+    <!-- STEP 0: PREPARE & BUILD -->
+    <div class="prep-box">
+      <div class="prep-header">
+        <span class="prep-title">🚀 Bước 0: Chuẩn bị &amp; đóng gói bản Update (Chung cho cả 3 Store)</span>
+        <button class="btn-copy" onclick="copyField(this, 'build-commands')">📋 Sao chép lệnh build</button>
+      </div>
+      <div class="prep-grid">
+        <div class="prep-step">
+          <strong>1. Tăng Version trong package.json</strong>
+          Mở <code>extension/package.json</code> (hiện đã nâng lên <code>1.1.0</code> và build sẵn trong <code>.output/</code>). Khi ra bản tiếp theo cần tăng tiếp, vì cả 3 store sẽ từ chối ZIP nếu trùng version đã phát hành.
+        </div>
+        <div class="prep-step">
+          <strong>2. Kiểm tra &amp; Đóng gói đồng bộ</strong>
+          Luôn chạy <code>npm run zip:all</code> để tạo mới cả 3 gói extension và <code>sources.zip</code> cho Firefox AMO cùng một lượt build.
+        </div>
+        <div class="prep-step">
+          <strong>3. Chú ý quyền mới trong wxt.config.ts</strong>
+          Manifest hiện có thêm quyền <code>tabs</code> (cho Tab Auto-Sync &amp; Tab Fetch). Nhớ điền giải trình quyền <code>tabs</code> bên dưới khi update Store!
+        </div>
+      </div>
+      <div class="cmd-block" id="build-commands">cd "d:\Project\Novel Scraper\extension"
+npm.cmd run check
+npm.cmd test
+npm.cmd run zip:all</div>
+    </div>
+
+    <!-- Top Store Switcher -->
+    <div class="store-tabs">
+      <button class="store-tab-btn active chrome" onclick="switchStore('chrome')">
+        <span>Google Chrome Web Store</span>
+      </button>
+      <button class="store-tab-btn edge" onclick="switchStore('edge')">
+        <span>Microsoft Edge Add-ons</span>
+      </button>
+      <button class="store-tab-btn firefox" onclick="switchStore('firefox')">
+        <span>Mozilla Firefox Add-ons (AMO)</span>
+      </button>
+    </div>
+
+    <!-- Language Selector -->
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="switchLang(this, 'vi')">🇻🇳 Tiếng Việt</button>
+      <button class="lang-btn" onclick="switchLang(this, 'en')">🇬🇧 English</button>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 1. CHROME WEB STORE PANEL                  -->
+    <!-- ========================================== -->
+    <div id="panel-chrome" class="store-panel active">
+
+      <div class="guide-card" style="border-color: rgba(0, 210, 255, 0.35);">
+        <div class="guide-title" style="color: var(--accent-chrome);">
+          <span>🧭 Các bước Update trên Chrome Web Store</span>
+          <a class="portal-link" href="https://chrome.google.com/webstore/devconsole" target="_blank" rel="noopener">Mở Chrome Developer Dashboard ↗</a>
+        </div>
+        <ul class="checklist">
+          <li><input type="checkbox" onchange="toggleDone(this)"><span>Đăng nhập Dashboard → chọn tiện ích <strong>Novel Scraper</strong>.</span></li>
+          <li><input type="checkbox" onchange="toggleDone(this)"><span>Vào mục <strong>Package</strong> → bấm <strong>Upload new package</strong> → tải lên <code>.output/novel-scraper-&lt;version&gt;-chrome.zip</code>.</span></li>
+          <li><input type="checkbox" onchange="toggleDone(this)"><span>Vào <strong>Store listing</strong> → cập nhật Mô tả chi tiết (bổ sung EPUB 3, JSON, Offline Reader, Deobfuscator, Backup/Restore).</span></li>
+          <li><input type="checkbox" onchange="toggleDone(this)"><span>Vào <strong>Privacy practices</strong> → điền giải trình cho quyền <code>tabs</code> (mới thêm) cùng <code>storage</code>, <code>activeTab</code>, <code>scripting</code>, <code>downloads</code>, <code>sidePanel</code> và <code>Host permission</code>.</span></li>
+          <li><input type="checkbox" onchange="toggleDone(this)"><span>Kiểm tra <strong>Data usage</strong> (không tích mục nào) &amp; <strong>Test instructions</strong> → bấm <strong>Submit for review</strong>.</span></li>
+        </ul>
+      </div>
+
+      <!-- VN -->
+      <div class="lang-content vi">
+        <div class="field-card">
+          <div class="field-header">
+            <span class="field-title">📌 Tên Tiện Ích (Extension Name)</span>
+            <span class="char-limit">Giới hạn: 45 ký tự (Hiện tại: 44 ký tự)</span>
+            <button class="btn-copy" onclick="copyField(this, 'chrome-name-vi')">📋 Sao chép</button>
+          </div>
+          <div class="field-content" id="chrome-name-vi">Novel Scraper - Trích xuất & Tải tiểu thuyết</div>
+        </div>
+
+        <div class="field-card">
+          <div class="field-header">
+            <span class="field-title">📝 Mô Tả Ngắn (Summary / Short Description)</span>
+            <span class="char-limit">Tối đa 132 ký tự (Hiện tại: 112 ký tự)</span>
+            <button class="btn-copy" onclick="copyField(this, 'chrome-short-vi')">📋 Sao chép</button>
+          </div>
+          <div class="field-content" id="chrome-short-vi">Tiện ích Side Panel cào tiểu thuyết mọi trang web, lọc sạch quảng cáo, đọc offline và xuất TXT, DOCX, PDF, EPUB.</div>
+        </div>
+
+        <div class="field-card">
+          <div class="field-header">
+            <span class="field-title">📖 Mô Tả Chi Tiết (Detailed Description)</span>
+            <button class="btn-copy" onclick="copyField(this, 'chrome-desc-vi')">📋 Sao chép</button>
+          </div>
+          <div class="field-content" id="chrome-desc-vi">Novel Scraper là tiện ích mở rộng Side Panel thông minh giúp bạn trích xuất, làm sạch, lưu trữ và đọc tiểu thuyết mạng ngoại tuyến từ mọi website, đồng thời xuất sách sang TXT, DOCX, PDF, EPUB 3 và JSON một cách nhanh chóng và hoàn toàn riêng tư.
+
+✨ CÁC TÍNH NĂNG NỔI BẬT:
+
+1. ENGINE BÓC TÁCH 3 TẦNG (UNIVERSAL ENGINE):
+• Cấu hình tối ưu sẵn (Presets): Hỗ trợ mượt mà nhiều trang truyện phổ biến (Cổ Mộng, TruyệnFull, Tàng Thư Viện, Mê Truyện Chữ...), tự động quét mục lục phân trang nhiều lớp và AJAX.
+• Tự Động Nhận Diện (Heuristic Reader View): Phân tích cấu trúc DOM và mật độ đoạn văn để tự tìm nội dung chương trên mọi website lạ.
+• Chọn Vùng Bằng Chuột (Visual Element Picker): Rê chuột phát sáng phần tử và click để lưu CSS selector riêng cho từng tên miền.
+
+2. LỌC VĂN BẢN SIÊU SẠCH (PURE TEXT SANITIZER):
+• Loại bỏ quảng cáo, iframe, ảnh/video rác, thẻ ẩn chống bot (honeypot) và ký tự tàng hình chống copy (\u200B-\u200D).
+• Chuẩn hóa Unicode tiếng Việt (NFC) chuẩn mực, không lỗi dấu.
+• Giải mã chữ bị xáo trộn (Deobfuscator), lọc watermark/re-up và hỗ trợ quy tắc Tìm & Thay thế (Find & Replace / Regex) tùy chỉnh.
+
+3. GỘP & XUẤT ĐA ĐỊNH DẠNG (TXT · DOCX · PDF · EPUB · JSON):
+• TXT (UTF-8 BOM): Mở chuẩn trên Windows Notepad, Word và ứng dụng đọc trên điện thoại.
+• DOCX (Microsoft Word): Heading phân cấp chương, ngắt trang tự động (PageBreak) và căn lề in ấn.
+• PDF: Bố cục sách in sạch đẹp, đánh số trang tự động.
+• EPUB 3: Chuẩn sách điện tử quốc tế, tương thích Kindle, Kobo, Apple Books.
+• JSON & Tách tập ZIP: Xuất dữ liệu đầy đủ hoặc tự động chia tập (vd: 100 chương/tập) thành 1 file .zip.
+
+4. CÀO LỊCH SỰ, THƯ VIỆN & TRÌNH ĐỌC OFFLINE:
+• Độ trễ ngẫu nhiên (1.5s - 3s), tự động thử lại khi gặp giới hạn tốc độ (429/503) và lưu tiến trình bền vững trong IndexedDB.
+• Tự động đồng bộ tab trình duyệt (Tab Auto-Sync), phát hiện và tải bù chương thiếu chỉ với 1 click.
+• Trình đọc Offline Reader tích hợp: 3 giao diện (Dark, Sepia, Light), chọn font Serif/Sans, chỉnh cỡ chữ và ghi nhớ tiến độ đọc.
+• Sao lưu & phục hồi toàn bộ thư viện qua file JSON.
+
+5. GIAO DIỆN HIỆN ĐẠI & BẢO MẬT 100% CLIENT-SIDE:
+• Thiết kế kính mờ Glassmorphism (Shades of Blue) với Dark/Light Mode và chuyển đổi song ngữ Tiếng Việt / English tức thì.
+• Phím tắt mở nhanh: Alt + Shift + N.
+• Không máy chủ thu thập, không telemetry — toàn bộ dữ liệu nằm trên máy của bạn.</div>
+        </div>
+
+        <div class="field-card">
+          <div class="field-header">
+            <span class="field-title">🏷️ Danh Mục (Category)</span>
+            <button class="btn-copy" onclick="copyField(this, 'chrome-cat-vi')">📋 Sao chép</button>
+          </div>
+          <div class="field-content" id="chrome-cat-vi">Productivity</div>
+        </div>
+      </div>
+
+      <!-- EN -->
+      <div class="lang-content en" style="display:none;">
+        <div class="field-card">
+          <div class="field-header">
+            <span class="field-title">📌 Extension Name</span>
+            <span class="char-limit">Limit: 45 chars (Current: 45 chars)</span>
+            <button class="btn-copy" onclick="copyField(this, 'chrome-name-en')">📋 Copy</button>
+          </div>
+          <div class="field-content" id="chrome-name-en">Novel Scraper - Web Novel Downloader & Reader</div>
+        </div>
+
+        <div class="field-card">
+          <div class="field-header">
+            <span class="field-title">📝 Summary / Short Description</span>
+            <span class="char-limit">Max 132 chars (Current: 115 chars)</span>
+            <button class="btn-copy" onclick="copyField(this, 'chrome-short-en')">📋 Copy</button>
+          </div>
+          <div class="field-content" id="chrome-short-en">Scrape web novels from any website in Side Panel. Clean text, read offline, and export to TXT, DOCX, PDF, and EPUB.</div>
+        </div>
+
+        <div class="field-card">
+          <div class="field-header">
+            <span class="field-title">📖 Detailed Description</span>
+            <button class="btn-copy" onclick="copyField(this, 'chrome-desc-en')">📋 Copy</button>
+          </div>
+          <div class="field-content" id="chrome-desc-en">Novel Scraper is a privacy-first Side Panel browser extension designed to help book lovers extract, clean, read offline, and export web novels from any website into TXT, DOCX, PDF, EPUB 3, and JSON formats.
+
+✨ KEY FEATURES:
+
+1. UNIVERSAL 3-TIER SCRAPING ENGINE:
+• Built-in Presets: Ready-to-use rules for popular novel platforms with multi-page and AJAX table-of-contents scanning.
+• Heuristic Reader View: Automatically detects chapter titles and main story content on unfamiliar websites using DOM and paragraph-density analysis.
+• Visual Element Picker: Hover to highlight elements and click to save custom CSS selectors per domain.
+
+2. PURE TEXT SANITIZER PIPELINE:
+• Strips ads, banners, scripts, iframes, hidden honeypot elements, and zero-width anti-copy characters (\u200B-\u200D).
+• Standardized Unicode normalization (NFC) for clean typography.
+• Text deobfuscator, custom watermark keyword filtering, and Find & Replace / Regex rules.
+
+3. MULTI-FORMAT EXPORT (TXT · DOCX · PDF · EPUB · JSON):
+• TXT (UTF-8 with BOM): Clean plain text with no encoding glitches.
+• DOCX (Microsoft Word): Structured headings, automatic page breaks between chapters, and print margins.
+• PDF: Print-ready book layout with automatic page numbering.
+• EPUB 3: Standard e-book archive compatible with Kindle, Kobo, and Apple Books.
+• JSON & Split-Volume ZIP: Export structured backups or automatically split long novels into multi-volume .zip bundles.
+
+4. POLITE CRAWLING & BUILT-IN OFFLINE READER:
+• Adaptive jitter delays (1.5s - 3.0s), exponential backoff on HTTP 429/503, and persistent IndexedDB queue.
+• Automatic browser Tab Auto-Sync and 1-click missing chapter detection & re-download.
+• Integrated Offline Reader with Dark, Sepia, and Light themes, Serif/Sans fonts, adjustable font size, and reading progress memory.
+• 1-click JSON Backup & Restore for your entire offline library and site rules.
+
+5. GLASSMORPHISM UI & ZERO TELEMETRY:
+• Shades of Blue frosted glass Side Panel UI with Dark/Light modes and instant English / Vietnamese language switching.
+• Quick shortcut: Alt + Shift + N.
+• 100% client-side: zero tracking, zero analytics, zero remote servers.</div>
+        </div>
+      </div>
+
+      <!-- Privacy & Permissions (Chrome) -->
+      <div class="section-banner" style="border: 1px solid rgba(0, 210, 255, 0.5); background: rgba(0, 210, 255, 0.08);">
+        <strong style="color: #00D2FF; font-size: 14px;">🛡️ PRIVACY PRACTICES &amp; PERMISSION JUSTIFICATIONS (CHROME WEB STORE)</strong><br>
+        Sao chép chính xác vào tab <strong>Privacy practices</strong> trên Chrome Web Store Developer Dashboard (bao gồm quyền <code>tabs</code> mới trong <code>wxt.config.ts</code>):
+      </div>
+
+      <div class="field-card">
+        <div class="field-header">
+          <span class="field-title">🎯 Single purpose description *</span>
+          <span class="char-limit">Tối đa 1000 ký tự</span>
+          <button class="btn-copy" onclick="copyField(this, 'chrome-single-purpose')">📋 Sao chép</button>
+        </div>
+        <div class="field-content" id="chrome-single-purpose">Novel Scraper is a side panel utility designed solely to allow users to extract, clean, read offline, and export web novel chapters from novel websites into TXT, DOCX, PDF, EPUB, and JSON files locally in their browser.</div>
+      </div>
+
+      <div class="field-card">
+        <div class="field-header">
+          <span class="field-title">💾 storage justification *</span>
+          <button class="btn-copy" onclick="copyField(this, 'chrome-storage-just')">📋 Sao chép</button>
+        </div>
+        <div class="field-content" id="chrome-storage-just">Required to store user preferences (theme, language, polite crawling delay, custom watermark filters, replacement rules) and maintain the offline novel library and site rules locally in browser storage and IndexedDB.</div>
+      </div>
+
+      <div class="field-card">
+        <div class="field-header">
+          <span class="field-title">📑 activeTab justification *</span>
+          <button class="btn-copy" onclick="copyField(this, 'chrome-activetab-just')">📋 Sao chép</button>
+        </div>
+        <div class="field-content" id="chrome-activetab-just">Required to access the active tab's novel webpage only when the user explicitly triggers chapter detection, TOC scanning, or the visual element picker.</div>
+      </div>
+
+      <div class="field-card highlight-new">
+        <div class="field-header">
+          <span class="field-title">🗂️ tabs justification * <span class="badge-new">QUYỀN MỚI TRONG WXT.CONFIG</span></span>
+          <button class="btn-copy" onclick="copyField(this, 'chrome-tabs-just')">📋 Sao chép</button>
+        </div>
+        <div class="field-content" id="chrome-tabs-just">Required to detect active tab switches/updates so the Side Panel automatically syncs with the novel currently viewed by the user, and to query/message the user's open novel tab for chapter extraction and same-origin page fetching during user-initiated crawls.</div>
+      </div>
+
+      <div class="field-card">
+        <div class="field-header">
+          <span class="field-title">⚡ scripting justification *</span>
+          <button class="btn-copy" onclick="copyField(this, 'chrome-scripting-just')">📋 Sao chép</button>
+        </div>
+        <div class="field-content" id="chrome-scripting-just">Required to inject the visual element picker overlay and reader view extraction logic into the active web novel page upon user request.</div>
+      </div>
+
+      <div class="field-card">
+        <div class="field-header">
+          <span class="field-title">📥 downloads justification *</span>
+          <button class="btn-copy" onclick="copyField(this, 'chrome-downloads-just')">📋 Sao chép</button>
+        </div>
+        <div class="field-content" id="chrome-downloads-just">Required to allow users to export and download compiled novel files (.txt, .docx, .pdf, .epub, .json, or .zip) and JSON library backups to their local computer.</div>
+      </div>
+
+      <div class="field-card">
+        <div class="field-header">
+          <span class="field-title">🖥️ sidePanel justification *</span>
+          <button class="btn-copy" onclick="copyField(this, 'chrome-sidepanel-just')">📋 Sao chép</button>
+        </div>
+        <div class="field-content" id="chrome-sidepanel-just">Required to display the extension's primary user interface and built-in offline reader inside the browser's side panel while the user browses novel pages.</div>
+      </div>
+
+      <div class="field-card">
+        <div class="field-header">
+          <span class="field-title">🌐 Host permission (&lt;all_urls&gt;) justification *</span>
+          <button class="btn-copy" onclick="copyField(this, 'chrome-host-just')">📋 Sao chép</button>
+        </div>
+        <div class="field-content" id="chrome-host-just">Required because web novels are hosted across thousands of independent domains. Users need to extract chapters from any novel reading website they visit and choose to scrape.</div>
+      </div>
+
+      <div class="field-card">
+        <div class="field-header">
+          <span class="field-title">📊 Data usage &amp; Privacy policy URL</span>
+          <button class="btn-copy" onclick="copyField(this, 'chrome-privacy-url')">📋 Sao chép URL</button>
+        </div>
+        <div style="font-size: 13px; color: #34D399;">
+          ✅ <strong>KHÔNG TÍCH CHỌN BẤT KỲ MỤC NÀO</strong> (100% Client-side, không thu thập dữ liệu người dùng).
+        </div>
+        <div class="field-content" id="chrome-privacy-url">https://github.com/novel-scraper/novel-scraper/blob/main/PRIVACY_POLICY.md</div>
+      </div>
+
+      <div class="field-card">
+        <div class="field-header">
+          <span class="field-title">🧪 Test Instructions (Hướng dẫn cho Chrome Reviewer)</span>
+          <button class="btn-copy" onclick="copyField(this, 'chrome-reviewer-notes')">📋 Sao chép</button>
+        </div>
+        <div class="field-content" id="chrome-reviewer-notes">Reviewer Test Instructions:
+1. Click the Novel Scraper toolbar icon (or press Alt+Shift+N) to open the Side Panel.
+2. Navigate to any web novel page (chapter page or table of contents).
+3. In the Scraper tab:
+   - Click "Auto Detect" to extract the chapter title and main text using heuristic reader view.
+   - Click "Pick with Mouse" to highlight DOM elements on the page and click to select a custom container (press ESC to cancel).
+   - Click "Scan TOC" to collect chapter links, then "Start Crawl" to save chapters locally in IndexedDB.
+4. In the Library tab:
+   - Open the built-in Offline Reader or export the saved novel to TXT, DOCX, PDF, EPUB, or JSON.
+5. Note on "tabs" permission: Used solely to auto-sync the Side Panel with the currently active novel tab and delegate same-origin chapter fetches to an open matching tab when triggered by the user. All data stays 100% local in the browser; no remote code or analytics are used.</div>
+      </div>
+
+      <div class="field-card">
+        <span class="field-title">📦 Gói ZIP &amp; Ảnh Quảng Bá (Chrome Web Store)</span>
+        <div class="assets-list">
+          <div class="asset-item">
+            <div class="asset-title">Gói Upload lên Dashboard</div>
+            <div class="asset-path">.output/novel-scraper-&lt;version&gt;-chrome.zip</div>
+          </div>
+          <div class="asset-item">
+            <div class="asset-title">Promo Tile / Banner</div>
+            <div class="asset-path">store-assets/promo-tile-440x280.png<br>store-assets/banner-1400x560.png</div>
+          </div>
+          <div class="asset-item">
+            <div class="asset-title">Screenshots Tiếng Việt (1280 x 800 px)</div>
+            <div class="asset-path">store-assets/screenshot-1-vi-1280x800.png<br>store-assets/screenshot-2-vi-1280x800.png<br>store-assets/screenshot-3-vi-1280x800.png</div>
+          </div>
+          <div class="asset-item">
+            <div class="asset-title">Screenshots English (1280 x 800 px)</div>
+            <div class="asset-path">store-assets/screenshot-1-en-1280x800.png<br>store-assets/screenshot-2-en-1280x800.png<br>store-assets/screenshot-3-en-1280x800.png</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- 2. MICROSOFT EDGE ADD-ONS PANEL            -->
+    <!-- ========================================== -->
+    <div id="panel-edge" class="store-panel">
+
+      <div class="guide-card" style="border-color: rgba(0, 120, 212, 0.45);">
+        <div class="guide-title" style="color: #60A5FA;">
+          <span>🧭 Các bước Update trên Microsoft Edge Add-ons</span>
+          <a class="portal-link" href="https://partner.microsoft.com/dashboard/microsoftedge" target="_blank" rel="noopener">Mở Microsoft Partner Center ↗</a>
+        </div>
+        <ul class="checklist">
+          <li><input type="checkbox" onchange="toggleDone(this)"><span>Đăng nhập Partner Center → chọn <strong>Novel Scraper</strong> → bấm <strong>Create new submission</strong> (hoặc <strong>Update</strong>).</span></li>
+          <li><input type="checkbox" onchange="toggleDone(this)"><span>Tab <strong>Packages</strong>: Xóa gói cũ và tải lên <code>.output/novel-scraper-&lt;version&gt;-edge.zip</code>.</span></li>
+          <li><input type="checkbox" onchange="toggleDone(this)"><span>Tab <strong>Properties / Store listings</strong> (VI &amp; EN): Cập nhật Description, Search terms và dán <strong>What's new in this version</strong>.</span></li>
+          <li><input type="checkbox" onchange="toggleDone(this)"><span>Tab <strong>Privacy</strong>: Kiểm tra đầy đủ giải trình quyền (gồm cả quyền <code>tabs</code> mới), Remote code = <strong>No</strong>, Data usage để trống, tích đủ <strong>3 ô Certification</strong>.</span></li>
+          <li><input type="checkbox" onchange="toggleDone(this)"><span>Tab <strong>Notes for certification</strong>: Dán hướng dẫn test → vào <strong>Review and publish</strong> → bấm <strong>Publish</strong>.</span></li>
+        </ul>
+      </div>
+
+      <!-- VN -->
+      <div class="lang-content vi">
+        <div class="field-card highlight-new">
+          <div class="field-header">
+            <span class="field-title">🆕 What's new in this version (Tiếng Việt)</span>
+            <button class="btn-copy" onclick="copyField(this, 'edge-whatsnew-vi')">📋 Sao chép</button>
+          </div>
+          <div class="field-content" id="edge-whatsnew-vi">• Bổ sung xuất sách điện tử EPUB 3 (tương thích Kindle, Kobo, Apple Books) và JSON dữ liệu có cấu trúc.
+• Hỗ trợ tách tập tự động theo số chương và đóng gói toàn bộ thành 1 tệp ZIP.
+• Tích hợp Trình Đọc Ngoại Tuyến (Offline Reader) ngay trong Side Panel với 3 chủ đề màu (Dark, Sepia, Light), đổi phông Serif/Sans và lưu vị trí chương đang đọc.
+• Tự động đồng bộ tab trình duyệt (Tab Auto-Sync) và hỗ trợ ủy quyền fetch qua tab đang mở để vượt lỗi CORS.
+• Nâng cấp bộ lọc văn bản: giải mã chữ bị xáo trộn (Deobfuscator), quy tắc Tìm & Thay thế (Regex), ẩn tiêu đề chương lặp lại.
+• Hỗ trợ quét mục lục phân trang nhiều lớp / AJAX và Sao lưu / Phục hồi thư viện JSON.</div>
+        </div>
+
+        <div class="field-card">
+          <div class="field-header">
+            <span class="field-title">📌 Tên Tiện Ích (Name)</span>
+            <span class="char-limit">Giới hạn: 50 ký tự (Hiện tại: 44 ký tự)</span>
+            <button class="btn-copy" onclick="copyField(this, 'edge-name-vi')">📋 Sao chép</button>
+          </div>
+          <div class="field-content" id="edge-name-vi">Novel Scraper - Trích xuất & Tải tiểu thuyết</div>
+        </div>
+
+        <div class="field-card">
+          <div class="field-header">
+            <span class="field-title">📝 Mô Tả Ngắn (Short Description)</span>
+            <span class="char-limit">Giới hạn: 150 ký tự (Hiện tại: 112 ký tự)</span>
+            <button class="btn-copy" onclick="copyField(this, 'edge-short-vi')">📋 Sao chép</button>
+          </div>
+          <div class="field-content" id="edge-short-vi">Tiện ích Side Panel cào tiểu thuyết mọi trang web, lọc sạch quảng cáo, đọc offline và xuất TXT, DOCX, PDF, EPUB.</div>
+        </div>
+
+        <div class="field-card">
+          <div class="field-header">
+            <span class="field-title">🏷️ Từ Khóa Tìm Kiếm (Search Terms)</span>
+            <span class="char-limit">Tối đa 10 từ khóa</span>
+            <button class="btn-copy" onclick="copyField(this, 'edge-tags-vi')">📋 Sao chép</button>
+          </div>
+          <div class="field-content" id="edge-tags-vi">cào truyện, tải tiểu thuyết, novel scraper, đọc truyện offline, xuất epub, xuất docx, xuất pdf, lọc quảng cáo truyện, reader view, web novel</div>
+        </div>
+
+        <div class="field-card">
+          <div class="field-header">
+            <span class="field-title">📖 Mô Tả Chi Tiết (Description)</span>
+            <button class="btn-copy" onclick="copyField(this, 'edge-desc-vi')">📋 Sao chép</button>
+          </div>
+          <div class="field-content" id="edge-desc-vi">Novel Scraper là tiện ích mở rộng Side Panel thông minh giúp bạn trích xuất, làm sạch, lưu trữ và đọc tiểu thuyết mạng ngoại tuyến từ mọi website, đồng thời xuất sách sang TXT, DOCX, PDF, EPUB 3 và JSON một cách nhanh chóng và hoàn toàn riêng tư.
+
+✨ CÁC TÍNH NĂNG NỔI BẬT:
+
+1. ENGINE BÓC TÁCH 3 TẦNG (UNIVERSAL ENGINE):
+• Cấu hình tối ưu sẵn (Presets): Hỗ trợ mượt mà nhiều trang truyện phổ biến (Cổ Mộng, TruyệnFull, Tàng Thư Viện, Mê Truyện Chữ...), tự động quét mục lục phân trang nhiều lớp và AJAX.
+• Tự Động Nhận Diện (Heuristic Reader View): Phân tích cấu trúc DOM và mật độ đoạn văn để tự tìm nội dung chương trên mọi website lạ.
+• Chọn Vùng Bằng Chuột (Visual Element Picker): Rê chuột phát sáng phần tử và click để lưu CSS selector riêng cho từng tên miền.
+
+2. LỌC VĂN BẢN SIÊU SẠCH (PURE TEXT SANITIZER):
+• Loại bỏ quảng cáo, iframe, ảnh/video rác, thẻ ẩn chống bot (honeypot) và ký tự tàng hình chống copy (\u200B-\u200D).
+• Chuẩn hóa Unicode tiếng Việt (NFC) chuẩn mực, không lỗi dấu.
+• Giải mã chữ bị xáo trộn (Deobfuscator), lọc watermark/re-up và hỗ trợ quy tắc Tìm & Thay thế (Find & Replace / Regex) tùy chỉnh.
+
+3. GỘP & XUẤT ĐA ĐỊNH DẠNG (TXT · DOCX · PDF · EPUB · JSON):
+• TXT (UTF-8 BOM): Mở chuẩn trên Windows Notepad, Word và ứng dụng đọc trên điện thoại.
+• DOCX (Microsoft Word): Heading phân cấp chương, ngắt trang tự động (PageBreak) và căn lề in ấn.
+• PDF: Bố cục sách in sạch đẹp, đánh số trang tự động.
+• EPUB 3: Chuẩn sách điện tử quốc tế, tương thích Kindle, Kobo, Apple Books.
+• JSON & Tách tập ZIP: Xuất dữ liệu đầy đủ hoặc tự động chia tập (vd: 100 chương/tập) thành 1 file .zip.
+
+4. CÀO LỊCH SỰ, THƯ VIỆN & TRÌNH ĐỌC OFFLINE:
+• Độ trễ ngẫu nhiên (1.5s - 3s), tự động thử lại khi gặp giới hạn tốc độ (429/503) và lưu tiến trình bền vững trong IndexedDB.
+• Tự động đồng bộ tab trình duyệt (Tab Auto-Sync), phát hiện và tải bù chương thiếu chỉ với 1 click.
+• Trình đọc Offline Reader tích hợp: 3 giao diện (Dark, Sepia, Light), chọn font Serif/Sans, chỉnh cỡ chữ và ghi nhớ tiến độ đọc.
+• Sao lưu & phục hồi toàn bộ thư viện qua file JSON.
+
+5. GIAO DIỆN HIỆN ĐẠI & BẢO MẬT 100% CLIENT-SIDE:
+• Thiết kế kính mờ Glassmorphism (Shades of Blue) với Dark/Light Mode và chuyển đổi song ngữ Tiếng Việt / English tức thì.
+• Phím tắt mở nhanh: Alt + Shift + N.
+• Không máy chủ thu thập, không telemetry — toàn bộ dữ liệu nằm trên máy của bạn.</div>
+        </div>
+      </div>
+
+      <!-- EN -->
+      <div class="lang-content en" style="display:none;">
+        <div class="field-card highlight-new">
+          <div class="field-header">
+            <span class="field-title">🆕 What's new in this version (English)</span>
+            <button class="btn-copy" onclick="copyField(this, 'edge-whatsnew-en')">📋 Copy</button>
+          </div>
+          <div class="field-content" id="edge-whatsnew-en">• Added EPUB 3 e-book export (compatible with Kindle, Kobo, Apple Books) and structured JSON export.
+• Added automatic volume splitting by chapter count with single-click ZIP bundling.
+• Built-in Offline Reader inside the Side Panel with Dark/Sepia/Light themes, Serif/Sans fonts, adjustable text size, and per-novel reading progress memory.
+• Added Tab Auto-Sync and same-origin tab-delegated fetch fallback for seamless crawling.
+• Upgraded text sanitizer: text deobfuscator, custom Find & Replace / Regex rules, and duplicate chapter title omission.
+• Enhanced multi-page / AJAX table-of-contents scanning plus 1-click JSON library Backup & Restore.</div>
+        </div>
+
+        <div class="field-card">
+          <div class="field-header">
+            <span class="field-title">📌 Name</span>
+            <span class="char-limit">Limit: 50 chars (Current: 45 chars)</span>
+            <button class="btn-copy" onclick="copyField(this, 'edge-name-en')">📋 Copy</button>
+          </div>
+          <div class="field-content" id="edge-name-en">Novel Scraper - Web Novel Downloader & Reader</div>
+        </div>
+
+        <div class="field-card">
+          <div class="field-header">
+            <span class="field-title">📝 Short Description</span>
+            <span class="char-limit">Limit: 150 chars (Current: 115 chars)</span>
+            <button class="btn-copy" onclick="copyField(this, 'edge-short-en')">📋 Copy</button>
+          </div>
+          <div class="field-content" id="edge-short-en">Scrape web novels from any website in Side Panel. Clean text, read offline, and export to TXT, DOCX, PDF, and EPUB.</div>
+        </div>
+
+        <div class="field-card">
+          <div class="field-header">
+            <span class="field-title">🏷️ Search Terms</span>
+            <span class="char-limit">Max 10 terms</span>
+            <button class="btn-copy" onclick="copyField(this, 'edge-tags-en')">📋 Copy</button>
+          </div>
+          <div class="field-content" id="edge-tags-en">novel scraper, web novel downloader, ebook converter, offline reader, export epub, export docx, export pdf, reader view, side panel scraper, clean novel text</div>
+        </div>
+
+        <div class="field-card">
+          <div class="field-header">
+            <span class="field-title">📖 Detailed Description</span>
+            <button class="btn-copy" onclick="copyField(this, 'edge-desc-en')">📋 Copy</button>
+          </div>
+          <div class="field-content" id="edge-desc-en">Novel Scraper is a privacy-first Side Panel browser extension designed to help book lovers extract, clean, read offline, and export web novels from any website into TXT, DOCX, PDF, EPUB 3, and JSON formats.
+
+✨ KEY FEATURES:
+
+1. UNIVERSAL 3-TIER SCRAPING ENGINE:
+• Built-in Presets: Ready-to-use rules for popular novel platforms with multi-page and AJAX table-of-contents scanning.
+• Heuristic Reader View: Automatically detects chapter titles and main story content on unfamiliar websites using DOM and paragraph-density analysis.
+• Visual Element Picker: Hover to highlight elements and click to save custom CSS selectors per domain.
+
+2. PURE TEXT SANITIZER PIPELINE:
+• Strips ads, banners, scripts, iframes, hidden honeypot elements, and zero-width anti-copy characters (\u200B-\u200D).
+• Standardized Unicode normalization (NFC) for clean typography.
+• Text deobfuscator, custom watermark keyword filtering, and Find & Replace / Regex rules.
+
+3. MULTI-FORMAT EXPORT (TXT · DOCX · PDF · EPUB · JSON):
+• TXT (UTF-8 with BOM): Clean plain text with no encoding glitches.
+• DOCX (Microsoft Word): Structured headings, automatic page breaks between chapters, and print margins.
+• PDF: Print-ready book layout with automatic page numbering.
+• EPUB 3: Standard e-book archive compatible with Kindle, Kobo, and Apple Books.
+• JSON & Split-Volume ZIP: Export structured backups or automatically split long novels into multi-volume .zip bundles.
+
+4. POLITE CRAWLING & BUILT-IN OFFLINE READER:
+• Adaptive jitter delays (1.5s - 3.0s), exponential backoff on HTTP 429/503, and persistent IndexedDB queue.
+• Automatic browser Tab Auto-Sync and 1-click missing chapter detection & re-download.
+• Integrated Offline Reader with Dark, Sepia, and Light themes, Serif/Sans fonts, adjustable font size, and reading progress memory.
+• 1-click JSON Backup & Restore for your entire offline library and site rules.
+
+5. GLASSMORPHISM UI & ZERO TELEMETRY:
+• Shades of Blue frosted glass Side Panel UI with Dark/Light modes and instant English / Vietnamese language switching.
+• Quick shortcut: Alt + Shift + N.
+• 100% client-side: zero tracking, zero analytics, zero remote servers.</div>
+        </div>
+      </div>
+
+      <!-- Privacy & Permissions (Edge) -->
+      <div class="section-banner" style="border: 1px solid rgba(0, 120, 212, 0.55); background: rgba(0, 120, 212, 0.08);">
+        <strong style="color: #60A5FA; font-size: 14px;">🛡️ PRIVACY &amp; PERMISSION JUSTIFICATIONS (MICROSOFT PARTNER CENTER)</strong><br>
+        Sao chép vào tab <strong>Privacy</strong> trên Microsoft Partner Center (gồm cả quyền <code>tabs</code> mới):
+      </div>
+
+      <div class="field-card">
+        <div class="field-header">
+          <span class="field-title">🎯 Single purpose description *</span>
+          <button class="btn-copy" onclick="copyField(this, 'edge-single-purpose')">📋 Sao chép</button>
+        </div>
+        <div class="field-content" id="edge-single-purpose">Novel Scraper is a side panel utility designed solely to allow users to extract, clean, read offline, and export web novel chapters from novel websites into TXT, DOCX, PDF, EPUB, and JSON files locally in their browser.</div>
+      </div>
+
+      <div class="field-card">
+        <div class="field-header">
+          <span class="field-title">💾 storage justification *</span>
+          <button class="btn-copy" onclick="copyField(this, 'edge-storage-just')">📋 Sao chép</button>
+        </div>
+        <div class="field-content" id="edge-storage-just">Required to store user preferences (theme, language, polite crawling delay, custom watermark filters, replacement rules) and maintain the offline novel library and site rules locally in browser storage and IndexedDB.</div>
+      </div>
+
+      <div class="field-card">
+        <div class="field-header">
+          <span class="field-title">📑 activeTab justification *</span>
+          <button class="btn-copy" onclick="copyField(this, 'edge-activetab-just')">📋 Sao chép</button>
+        </div>
+        <div class="field-content" id="edge-activetab-just">Required to access the active tab's novel webpage only when the user explicitly triggers chapter detection, TOC scanning, or the visual element picker.</div>
+      </div>
+
+      <div class="field-card highlight-new">
+        <div class="field-header">
+          <span class="field-title">🗂️ tabs justification * <span class="badge-new">QUYỀN MỚI TRONG WXT.CONFIG</span></span>
+          <button class="btn-copy" onclick="copyField(this, 'edge-tabs-just')">📋 Sao chép</button>
+        </div>
+        <div class="field-content" id="edge-tabs-just">Required to detect active tab switches/updates so the Side Panel automatically syncs with the novel currently viewed by the user, and to query/message the user's open novel tab for chapter extraction and same-origin page fetching during user-initiated crawls.</div>
+      </div>
+
+      <div class="field-card">
+        <div class="field-header">
+          <span class="field-title">⚡ scripting justification *</span>
+          <button class="btn-copy" onclick="copyField(this, 'edge-scripting-just')">📋 Sao chép</button>
+        </div>
+        <div class="field-content" id="edge-scripting-just">Required to inject the visual element picker overlay and reader view extraction logic into the active web novel page upon user request.</div>
+      </div>
+
+      <div class="field-card">
+        <div class="field-header">
+          <span class="field-title">📥 downloads justification *</span>
+          <button class="btn-copy" onclick="copyField(this, 'edge-downloads-just')">📋 Sao chép</button>
+        </div>
+        <div class="field-content" id="edge-downloads-just">Required to allow users to export and download compiled novel files (.txt, .docx, .pdf, .epub, .json, or .zip) and JSON library backups to their local computer.</div>
+      </div>
+
+      <div class="field-card">
+        <div class="field-header">
+          <span class="field-title">🖥️ sidePanel justification *</span>
+          <button class="btn-copy" onclick="copyField(this, 'edge-sidepanel-just')">📋 Sao chép</button>
+        </div>
+        <div class="field-content" id="edge-sidepanel-just">Required to display the extension's primary user interface and built-in offline reader inside the browser's side panel while the user browses novel pages.</div>
+      </div>
+
+      <div class="field-card">
+        <div class="field-header">
+          <span class="field-title">🌐 Host permission (&lt;all_urls&gt;) justification *</span>
+          <button class="btn-copy" onclick="copyField(this, 'edge-host-just')">📋 Sao chép</button>
+        </div>
+        <div class="field-content" id="edge-host-just">Required because web novels are hosted across thousands of independent domains. Users need to extract chapters from any novel reading website they visit and choose to scrape.</div>
+      </div>
+
+      <div class="field-card">
+        <div class="field-header">
+          <span class="field-title">🔒 Remote code, Data usage &amp; Certification</span>
+          <button class="btn-copy" onclick="copyField(this, 'edge-remote-code-just')">📋 Sao chép giải trình Remote Code</button>
+        </div>
+        <div style="font-size: 13px; color: #E2E8F0; line-height: 1.7;">
+          • <strong>Are you using remote code?</strong> → Chọn <strong>🔘 No, I am not using remote code</strong><br>
+          • <strong>Data usage:</strong> ✅ <strong>ĐỂ TRỐNG TOÀN BỘ</strong> (không tích chọn ô nào)<br>
+          • <strong>I certify that the following disclosures are true:</strong> ☑️ <strong>Tích chọn cả 3 ô vuông</strong>
+        </div>
+        <div class="field-content" id="edge-remote-code-just">All JavaScript, CSS, and assets are bundled locally inside the extension package via Vite/WXT. No remote code, eval(), or external CDN scripts are loaded or executed.</div>
+      </div>
+
+      <div class="field-card">
+        <div class="field-header">
+          <span class="field-title">🔗 Privacy policy URL *</span>
+          <button class="btn-copy" onclick="copyField(this, 'edge-privacy-url')">📋 Sao chép</button>
+        </div>
+        <div class="field-content" id="edge-privacy-url">https://github.com/novel-scraper/novel-scraper/blob/main/PRIVACY_POLICY.md</div>
+      </div>
+
+      <div class="field-card">
+        <div class="field-header">
+          <span class="field-title">🧪 Notes for Certification (Microsoft Edge Reviewer)</span>
+          <button class="btn-copy" onclick="copyField(this, 'edge-reviewer-notes')">📋 Sao chép</button>
+        </div>
+        <div class="field-content" id="edge-reviewer-notes">Reviewer Test Instructions:
+1. Click the Novel Scraper toolbar icon (or press Alt+Shift+N) to open the Side Panel.
+2. Navigate to any web novel page (chapter page or table of contents).
+3. In the Scraper tab:
+   - Click "Auto Detect" to extract the chapter title and main text using heuristic reader view.
+   - Click "Pick with Mouse" to highlight DOM elements on the page and click to select a custom container (press ESC to cancel).
+   - Click "Scan TOC" to collect chapter links, then "Start Crawl" to save chapters locally in IndexedDB.
+4. In the Library tab:
+   - Open the built-in Offline Reader or export the saved novel to TXT, DOCX, PDF, EPUB, or JSON.
+5. Note on "tabs" permission: Used solely to auto-sync the Side Panel with the currently active novel tab and delegate same-origin chapter fetches to an open matching tab when triggered by the user. All data stays 100% local in the browser; no remote code or analytics are used.</div>
+      </div>
+
+      <div class="field-card">
+        <span class="field-title">📦 Tệp Gói ZIP Nộp Lên Edge Partner Center</span>
+        <div class="field-content">.output/novel-scraper-&lt;version&gt;-edge.zip</div>
+      </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- 3. MOZILLA FIREFOX AMO PANEL               -->
+    <!-- ========================================== -->
+    <div id="panel-firefox" class="store-panel">
+
+      <div class="guide-card" style="border-color: rgba(255, 113, 57, 0.45);">
+        <div class="guide-title" style="color: var(--accent-firefox);">
+          <span>🧭 Các bước Update trên Mozilla Firefox Add-ons (AMO)</span>
+          <a class="portal-link" href="https://addons.mozilla.org/developers" target="_blank" rel="noopener">Mở AMO Developer Hub ↗</a>
+        </div>
+        <ul class="checklist">
+          <li><input type="checkbox" onchange="toggleDone(this)"><span>Đăng nhập AMO Developer Hub → <strong>Manage My Submissions</strong> → chọn <strong>Novel Scraper</strong> → bấm <strong>Upload New Version</strong>.</span></li>
+          <li><input type="checkbox" onchange="toggleDone(this)"><span>Chọn kênh <strong>On this site</strong> (Listed) → tải lên <code>.output/novel-scraper-&lt;version&gt;-firefox.zip</code>.</span></li>
+          <li><input type="checkbox" onchange="toggleDone(this)"><span>Khi được hỏi <strong>Submit Source Code?</strong> → chọn <strong>Yes</strong> → tải lên <code>.output/novel-scraper-&lt;version&gt;-sources.zip</code> (phải được build cùng lúc với file firefox.zip).</span></li>
+          <li><input type="checkbox" onchange="toggleDone(this)"><span>Điền <strong>Release Notes</strong> (What's New) và <strong>Notes to Reviewer</strong> (kèm lệnh <code>npm ci</code>, <code>npm test</code>, <code>npm run build:firefox</code>).</span></li>
+          <li><input type="checkbox" onchange="toggleDone(this)"><span>Vào <strong>Edit Product Page</strong> nếu cần cập nhật Summary / Description / Tags mới → bấm <strong>Submit Version</strong>.</span></li>
+        </ul>
+      </div>
+
+      <!-- VN -->
+      <div class="lang-content vi">
+        <div class="field-card highlight-new">
+          <div class="field-header">
+            <span class="field-title">🆕 Release Notes (Tiếng Việt)</span>
+            <button class="btn-copy" onclick="copyField(this, 'firefox-whatsnew-vi')">📋 Sao chép</button>
+          </div>
+          <div class="field-content" id="firefox-whatsnew-vi">• Bổ sung xuất sách điện tử EPUB 3 (tương thích Kindle, Kobo, Apple Books) và JSON dữ liệu có cấu trúc.
+• Hỗ trợ tách tập tự động theo số chương và đóng gói toàn bộ thành 1 tệp ZIP.
+• Tích hợp Trình Đọc Ngoại Tuyến (Offline Reader) ngay trong Sidebar với 3 chủ đề màu (Dark, Sepia, Light), đổi phông Serif/Sans và lưu vị trí chương đang đọc.
+• Tự động đồng bộ tab trình duyệt (Tab Auto-Sync) và hỗ trợ ủy quyền fetch qua tab đang mở để vượt lỗi CORS.
+• Nâng cấp bộ lọc văn bản: giải mã chữ bị xáo trộn (Deobfuscator), quy tắc Tìm & Thay thế (Regex), ẩn tiêu đề chương lặp lại.
+• Hỗ trợ quét mục lục phân trang nhiều lớp / AJAX và Sao lưu / Phục hồi thư viện JSON.</div>
+        </div>
+
+        <div class="field-card">
+          <div class="field-header">
+            <span class="field-title">📌 Tên Add-on (Name)</span>
+            <span class="char-limit">Giới hạn: 50 ký tự (Hiện tại: 44 ký tự)</span>
+            <button class="btn-copy" onclick="copyField(this, 'firefox-name-vi')">📋 Sao chép</button>
+          </div>
+          <div class="field-content" id="firefox-name-vi">Novel Scraper - Trích xuất & Tải tiểu thuyết</div>
+        </div>
+
+        <div class="field-card">
+          <div class="field-header">
+            <span class="field-title">📝 Tóm Tắt Ngắn (Summary)</span>
+            <span class="char-limit">Giới hạn: 250 ký tự (Hiện tại: 112 ký tự)</span>
+            <button class="btn-copy" onclick="copyField(this, 'firefox-short-vi')">📋 Sao chép</button>
+          </div>
+          <div class="field-content" id="firefox-short-vi">Tiện ích Side Panel cào tiểu thuyết mọi trang web, lọc sạch quảng cáo, đọc offline và xuất TXT, DOCX, PDF, EPUB.</div>
+        </div>
+
+        <div class="field-card">
+          <div class="field-header">
+            <span class="field-title">🏷️ Thẻ Phân Loại (Tags)</span>
+            <button class="btn-copy" onclick="copyField(this, 'firefox-tags-vi')">📋 Sao chép</button>
+          </div>
+          <div class="field-content" id="firefox-tags-vi">cào truyện, tải tiểu thuyết, novel scraper, đọc offline, xuất epub, xuất docx, xuất pdf</div>
+        </div>
+
+        <div class="field-card">
+          <div class="field-header">
+            <span class="field-title">📖 Mô Tả Chi Tiết (Description)</span>
+            <button class="btn-copy" onclick="copyField(this, 'firefox-desc-vi')">📋 Sao chép</button>
+          </div>
+          <div class="field-content" id="firefox-desc-vi">Novel Scraper là tiện ích mở rộng Sidebar thông minh giúp bạn trích xuất, làm sạch, lưu trữ và đọc tiểu thuyết mạng ngoại tuyến từ mọi website, đồng thời xuất sách sang TXT, DOCX, PDF, EPUB 3 và JSON một cách nhanh chóng và hoàn toàn riêng tư.
+
+✨ CÁC TÍNH NĂNG NỔI BẬT:
+
+1. ENGINE BÓC TÁCH 3 TẦNG (UNIVERSAL ENGINE):
+• Cấu hình tối ưu sẵn (Presets): Hỗ trợ mượt mà nhiều trang truyện phổ biến (Cổ Mộng, TruyệnFull, Tàng Thư Viện, Mê Truyện Chữ...), tự động quét mục lục phân trang nhiều lớp và AJAX.
+• Tự Động Nhận Diện (Heuristic Reader View): Phân tích cấu trúc DOM và mật độ đoạn văn để tự tìm nội dung chương trên mọi website lạ.
+• Chọn Vùng Bằng Chuột (Visual Element Picker): Rê chuột phát sáng phần tử và click để lưu CSS selector riêng cho từng tên miền.
+
+2. LỌC VĂN BẢN SIÊU SẠCH (PURE TEXT SANITIZER):
+• Loại bỏ quảng cáo, iframe, ảnh/video rác, thẻ ẩn chống bot (honeypot) và ký tự tàng hình chống copy (\u200B-\u200D).
+• Chuẩn hóa Unicode tiếng Việt (NFC) chuẩn mực, không lỗi dấu.
+• Giải mã chữ bị xáo trộn (Deobfuscator), lọc watermark/re-up và hỗ trợ quy tắc Tìm & Thay thế (Find & Replace / Regex) tùy chỉnh.
+
+3. GỘP & XUẤT ĐA ĐỊNH DẠNG (TXT · DOCX · PDF · EPUB · JSON):
+• TXT (UTF-8 BOM): Mở chuẩn trên Windows Notepad, Word và ứng dụng đọc trên điện thoại.
+• DOCX (Microsoft Word): Heading phân cấp chương, ngắt trang tự động (PageBreak) và căn lề in ấn.
+• PDF: Bố cục sách in sạch đẹp, đánh số trang tự động.
+• EPUB 3: Chuẩn sách điện tử quốc tế, tương thích Kindle, Kobo, Apple Books.
+• JSON & Tách tập ZIP: Xuất dữ liệu đầy đủ hoặc tự động chia tập (vd: 100 chương/tập) thành 1 file .zip.
+
+4. CÀO LỊCH SỰ, THƯ VIỆN & TRÌNH ĐỌC OFFLINE:
+• Độ trễ ngẫu nhiên (1.5s - 3s), tự động thử lại khi gặp giới hạn tốc độ (429/503) và lưu tiến trình bền vững trong IndexedDB.
+• Tự động đồng bộ tab trình duyệt (Tab Auto-Sync), phát hiện và tải bù chương thiếu chỉ với 1 click.
+• Trình đọc Offline Reader tích hợp: 3 giao diện (Dark, Sepia, Light), chọn font Serif/Sans, chỉnh cỡ chữ và ghi nhớ tiến độ đọc.
+• Sao lưu & phục hồi toàn bộ thư viện qua file JSON.
+
+5. GIAO DIỆN HIỆN ĐẠI & BẢO MẬT 100% CLIENT-SIDE:
+• Thiết kế kính mờ Glassmorphism (Shades of Blue) với Dark/Light Mode và chuyển đổi song ngữ Tiếng Việt / English tức thì.
+• Phím tắt mở nhanh: Alt + Shift + N.
+• Không máy chủ thu thập, không telemetry — toàn bộ dữ liệu nằm trên máy của bạn.</div>
+        </div>
+      </div>
+
+      <!-- EN -->
+      <div class="lang-content en" style="display:none;">
+        <div class="field-card highlight-new">
+          <div class="field-header">
+            <span class="field-title">🆕 Release Notes (English)</span>
+            <button class="btn-copy" onclick="copyField(this, 'firefox-whatsnew-en')">📋 Copy</button>
+          </div>
+          <div class="field-content" id="firefox-whatsnew-en">• Added EPUB 3 e-book export (compatible with Kindle, Kobo, Apple Books) and structured JSON export.
+• Added automatic volume splitting by chapter count with single-click ZIP bundling.
+• Built-in Offline Reader inside the Sidebar with Dark/Sepia/Light themes, Serif/Sans fonts, adjustable text size, and per-novel reading progress memory.
+• Added Tab Auto-Sync and same-origin tab-delegated fetch fallback for seamless crawling.
+• Upgraded text sanitizer: text deobfuscator, custom Find & Replace / Regex rules, and duplicate chapter title omission.
+• Enhanced multi-page / AJAX table-of-contents scanning plus 1-click JSON library Backup & Restore.</div>
+        </div>
+
+        <div class="field-card">
+          <div class="field-header">
+            <span class="field-title">📌 Name</span>
+            <span class="char-limit">Limit: 50 chars (Current: 45 chars)</span>
+            <button class="btn-copy" onclick="copyField(this, 'firefox-name-en')">📋 Copy</button>
+          </div>
+          <div class="field-content" id="firefox-name-en">Novel Scraper - Web Novel Downloader & Reader</div>
+        </div>
+
+        <div class="field-card">
+          <div class="field-header">
+            <span class="field-title">📝 Summary</span>
+            <span class="char-limit">Limit: 250 chars (Current: 115 chars)</span>
+            <button class="btn-copy" onclick="copyField(this, 'firefox-short-en')">📋 Copy</button>
+          </div>
+          <div class="field-content" id="firefox-short-en">Scrape web novels from any website in Side Panel. Clean text, read offline, and export to TXT, DOCX, PDF, and EPUB.</div>
+        </div>
+
+        <div class="field-card">
+          <div class="field-header">
+            <span class="field-title">🏷️ Tags</span>
+            <button class="btn-copy" onclick="copyField(this, 'firefox-tags-en')">📋 Copy</button>
+          </div>
+          <div class="field-content" id="firefox-tags-en">novel scraper, web novel downloader, ebook converter, offline reader, export epub, export docx</div>
+        </div>
+
+        <div class="field-card">
+          <div class="field-header">
+            <span class="field-title">📖 Description</span>
+            <button class="btn-copy" onclick="copyField(this, 'firefox-desc-en')">📋 Copy</button>
+          </div>
+          <div class="field-content" id="firefox-desc-en">Novel Scraper is a privacy-first Sidebar browser extension designed to help book lovers extract, clean, read offline, and export web novels from any website into TXT, DOCX, PDF, EPUB 3, and JSON formats.
+
+✨ KEY FEATURES:
+
+1. UNIVERSAL 3-TIER SCRAPING ENGINE:
+• Built-in Presets: Ready-to-use rules for popular novel platforms with multi-page and AJAX table-of-contents scanning.
+• Heuristic Reader View: Automatically detects chapter titles and main story content on unfamiliar websites using DOM and paragraph-density analysis.
+• Visual Element Picker: Hover to highlight elements and click to save custom CSS selectors per domain.
+
+2. PURE TEXT SANITIZER PIPELINE:
+• Strips ads, banners, scripts, iframes, hidden honeypot elements, and zero-width anti-copy characters (\u200B-\u200D).
+• Standardized Unicode normalization (NFC) for clean typography.
+• Text deobfuscator, custom watermark keyword filtering, and Find & Replace / Regex rules.
+
+3. MULTI-FORMAT EXPORT (TXT · DOCX · PDF · EPUB · JSON):
+• TXT (UTF-8 with BOM): Clean plain text with no encoding glitches.
+• DOCX (Microsoft Word): Structured headings, automatic page breaks between chapters, and print margins.
+• PDF: Print-ready book layout with automatic page numbering.
+• EPUB 3: Standard e-book archive compatible with Kindle, Kobo, and Apple Books.
+• JSON & Split-Volume ZIP: Export structured backups or automatically split long novels into multi-volume .zip bundles.
+
+4. POLITE CRAWLING & BUILT-IN OFFLINE READER:
+• Adaptive jitter delays (1.5s - 3.0s), exponential backoff on HTTP 429/503, and persistent IndexedDB queue.
+• Automatic browser Tab Auto-Sync and 1-click missing chapter detection & re-download.
+• Integrated Offline Reader with Dark, Sepia, and Light themes, Serif/Sans fonts, adjustable font size, and reading progress memory.
+• 1-click JSON Backup & Restore for your entire offline library and site rules.
+
+5. GLASSMORPHISM UI & ZERO TELEMETRY:
+• Shades of Blue frosted glass Sidebar UI with Dark/Light modes and instant English / Vietnamese language switching.
+• Quick shortcut: Alt + Shift + N.
+• 100% client-side: zero tracking, zero analytics, zero remote servers.</div>
+        </div>
+      </div>
+
+      <div class="field-card">
+        <div class="field-header">
+          <span class="field-title">🔒 Quyền Riêng Tư &amp; Dữ Liệu AMO</span>
+        </div>
+        <div class="field-content">Data collected: None (Không thu thập dữ liệu).
+Manifest đã khai báo sẵn: "data_collection_permissions": { "required": ["none"] } và "strict_min_version": "142.0".
+Firefox sử dụng "sidebar_action" (không cần quyền "sidePanel").</div>
+      </div>
+
+      <div class="field-card">
+        <span class="field-header">
+          <span class="field-title">📦 Hai Tệp Bắt Buộc Nộp Lên Mozilla AMO</span>
+        </span>
+        <div class="assets-list">
+          <div class="asset-item">
+            <div class="asset-title">1. Gói Extension Add-on ZIP</div>
+            <div class="asset-path">.output/novel-scraper-&lt;version&gt;-firefox.zip</div>
+          </div>
+          <div class="asset-item">
+            <div class="asset-title">2. Gói Mã Nguồn (Source Code ZIP)</div>
+            <div class="asset-path">.output/novel-scraper-&lt;version&gt;-sources.zip</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field-card">
+        <div class="field-header">
+          <span class="field-title">💬 Notes to Reviewer (Bắt buộc giải thích build &amp; quyền tabs)</span>
+          <button class="btn-copy" onclick="copyField(this, 'firefox-reviewer-notes')">📋 Sao chép</button>
+        </div>
+        <div class="field-content" id="firefox-reviewer-notes">Dear AMO Reviewer,
+
+This update keeps all processing 100% client-side with zero telemetry or remote code execution ("data_collection_permissions": { "required": ["none"] }).
+
+Note on permissions:
+- "tabs" is used solely to sync the sidebar UI when the user switches tabs and to communicate with the active/matching novel tab during user-initiated TOC scanning or chapter fetching.
+
+To reproduce the exact Firefox build from the uploaded sources.zip:
+1. Ensure Node.js v20+ (tested on v22 LTS) and npm v10+ are installed.
+2. Unpack novel-scraper-<version>-sources.zip and run:
+   npm ci
+3. Run the automated test suite:
+   npm test
+4. Build the Firefox MV3 extension:
+   npm run build:firefox
+5. The identical build output is generated in .output/firefox-mv3/
+
+How to test:
+1. Open any web novel chapter or table-of-contents page.
+2. Open the Novel Scraper sidebar (toolbar icon or Alt+Shift+N).
+3. Click "Auto Detect" or "Pick with Mouse" to extract content, or "Scan TOC" to gather chapters.
+4. Export to TXT, DOCX, PDF, EPUB, or JSON, or open the built-in Offline Reader in the Library tab.
+
+Thank you!</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast">✓ Đã sao chép vào bộ nhớ tạm!</div>
+
+  <script>
+    function switchStore(store) {
+      document.querySelectorAll('.store-tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      const activeBtn = document.querySelector(`.store-tab-btn.${store}`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      document.querySelectorAll('.store-panel').forEach(panel => {
+        panel.classList.remove('active');
+      });
+      const activePanel = document.getElementById(`panel-${store}`);
+      if (activePanel) activePanel.classList.add('active');
+    }
+
+    function switchLang(btnEl, lang) {
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      if (btnEl) btnEl.classList.add('active');
+
+      document.querySelectorAll('.lang-content').forEach(el => {
+        el.style.display = el.classList.contains(lang) ? 'flex' : 'none';
+      });
+    }
+
+    function toggleDone(checkbox) {
+      const li = checkbox.closest('li');
+      if (li) {
+        li.classList.toggle('done', checkbox.checked);
+      }
+    }
+
+    function copyField(btn, elementId) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      const text = el.innerText || el.textContent || '';
+
+      const onSuccess = () => {
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '✓ Đã chép!';
+        btn.classList.add('copied');
+        showToast('✓ Đã sao chép vào bộ nhớ tạm!');
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          btn.classList.remove('copied');
+        }, 1800);
+      };
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(onSuccess).catch(() => {
+          fallbackCopy(text, onSuccess);
+        });
+      } else {
+        fallbackCopy(text, onSuccess);
+      }
+    }
+
+    function fallbackCopy(text, onSuccess) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        onSuccess();
+      } catch (err) {
+        console.error('Fallback copy failed', err);
+      }
+      document.body.removeChild(ta);
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.innerText = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2000);
+    }
+  </script>
+</body>
+</html>

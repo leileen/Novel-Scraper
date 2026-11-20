@@ -1,0 +1,40 @@
+# OS & Editor
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# Environment & Logs
+.env
+.env.*
+!.env.example
+*.log
+tauri_panic.log
+tauri_status.log
+
+# Dependencies & Build Caches
+node_modules/
+.wxt/
+.output/
+.svelte-kit/
+/desktop/build/
+/desktop/package/
+/desktop/src-tauri/target/
+/desktop/src-tauri/gen/schemas/
+.xwin/
+.xwin-cache/
+
+# Release Binaries & Archives
+*.exe
+*.msi
+*.dmg
+*.AppImage
+*.deb
+*.zip
+*.tar.gz
+
+# Internal Agent Artifacts
+.agents/

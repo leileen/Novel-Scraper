@@ -1,0 +1,148 @@
+/* ==========================================================================
+   NOVEL SCRAPER DESKTOP APP - DESIGN SYSTEM
+   Theme: Solid Dark Theme + Flat Design
+   Based on: Đặc Tả UI/UX - Novel Scraper Desktop App
+   ========================================================================== */
+
+:root {
+  /* Core Color Palette */
+  --bg-sidebar: #111520;
+  --bg-main: #161B29;
+  --bg-card: #1C2230;
+  --bg-card-hover: #22293a;
+  --bg-input: #0e121a;
+
+  /* Accent Color (Default: Neon Cyan) */
+  --accent-cyan: #00D2FF;
+  --accent-cyan-rgb: 0, 210, 255;
+  --accent-glow: rgba(0, 210, 255, 0.25);
+
+  /* Status Colors */
+  --status-success: #10B981;
+  --status-warning: #F59E0B;
+  --status-error: #EF4444;
+  --status-paused: #6B7280;
+
+  /* Typography Colors */
+  --text-main: #F8FAFC;
+  --text-muted: #8B949E;
+  --text-dim: #64748B;
+
+  /* Borders & Dividers */
+  --border-subtle: 1px solid rgba(255, 255, 255, 0.05);
+  --border-card: 1px solid rgba(255, 255, 255, 0.07);
+  --border-hover: 1px solid rgba(0, 210, 255, 0.3);
+  --border-error: 1px solid #EF4444;
+
+  /* Spacing & Radii */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-glow: 0 0 16px rgba(0, 210, 255, 0.2);
+
+  /* Reader Themes */
+  --reader-dark-bg: #111520;
+  --reader-dark-text: #D1D5DB;
+
+  --reader-light-bg: #FAFAFA;
+  --reader-light-text: #1F2937;
+
+  --reader-sepia-bg: #F4ECD8;
+  --reader-sepia-text: #5B4636;
+
+  /* Typography - 100% Vietnamese Unicode NFC compatible on Windows */
+  --font-sans: "Segoe UI", "Inter", -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: "Palatino Linotype", "Times New Roman", "Cambria", serif;
+  --font-book: "Cambria", "Times New Roman", "Palatino Linotype", serif;
+  --font-mono: "Consolas", "Cascadia Mono", "Courier New", monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--font-sans);
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  user-select: none;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Common Interactive Classes */
+button {
+  font-family: inherit;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.15s ease-in-out;
+}
+
+button:focus-visible, input:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 1px;
+}
+
+input, select, textarea {
+  font-family: inherit;
+  color: var(--text-main);
+  background-color: var(--bg-input);
+  border: var(--border-subtle);
+  border-radius: var(--radius-md);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 0 1px rgba(var(--accent-cyan-rgb), 0.2);
+}
+
+/* Helper utilities */
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pill-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  background-color: rgba(255, 255, 255, 0.08);
+  color: var(--text-muted);
+}

@@ -1,0 +1,127 @@
+{
+  "extName": {
+    "message": "Novel Scraper - Trích xuất & Tải Tiểu Thuyết",
+    "description": "Tên tiện ích mở rộng"
+  },
+  "extDesc": {
+    "message": "Tiện ích Side Panel cào tiểu thuyết từ mọi trang web, lọc văn bản sạch, xuất TXT, DOCX, PDF chuyên nghiệp.",
+    "description": "Mô tả tiện ích mở rộng"
+  },
+  "tabScraper": {
+    "message": "Cào truyện"
+  },
+  "tabLibrary": {
+    "message": "Kho truyện"
+  },
+  "tabSettings": {
+    "message": "Cài đặt"
+  },
+  "tabRules": {
+    "message": "Luật trang"
+  },
+  "currentNovel": {
+    "message": "Truyện hiện tại"
+  },
+  "novelTitle": {
+    "message": "Tên truyện"
+  },
+  "sourceUrl": {
+    "message": "Nguồn trang"
+  },
+  "chapters": {
+    "message": "Chương"
+  },
+  "progress": {
+    "message": "Tiến trình"
+  },
+  "size": {
+    "message": "Dung lượng"
+  },
+  "chapterList": {
+    "message": "Danh sách chương"
+  },
+  "btnSelectElement": {
+    "message": "Chọn vùng bằng chuột"
+  },
+  "btnAutoDetect": {
+    "message": "Tự nhận diện"
+  },
+  "btnScanToc": {
+    "message": "Quét mục lục"
+  },
+  "btnStartCrawl": {
+    "message": "Bắt đầu cào"
+  },
+  "btnPause": {
+    "message": "Tạm dừng"
+  },
+  "btnResume": {
+    "message": "Tiếp tục"
+  },
+  "btnCancel": {
+    "message": "Hủy bỏ"
+  },
+  "btnExport": {
+    "message": "Gộp & Tải về"
+  },
+  "btnExportMissing": {
+    "message": "Tải bù chương thiếu"
+  },
+  "statusIdle": {
+    "message": "Sẵn sàng"
+  },
+  "statusScanning": {
+    "message": "Đang quét danh sách chương..."
+  },
+  "statusCrawling": {
+    "message": "Đang cào chương..."
+  },
+  "statusPaused": {
+    "message": "Đã tạm dừng"
+  },
+  "statusCompleted": {
+    "message": "Hoàn tất"
+  },
+  "statusError": {
+    "message": "Gặp lỗi"
+  },
+  "formatTxt": {
+    "message": "TXT (UTF-8 BOM)"
+  },
+  "formatDocx": {
+    "message": "DOCX (Word chuẩn)"
+  },
+  "formatPdf": {
+    "message": "PDF (Sách in ấn)"
+  },
+  "delaySetting": {
+    "message": "Độ trễ lịch sự giữa các chương (giây)"
+  },
+  "adKeywords": {
+    "message": "Từ khóa lọc rác & watermark"
+  },
+  "darkMode": {
+    "message": "Giao diện tối"
+  },
+  "lightMode": {
+    "message": "Giao diện sáng"
+  },
+  "language": {
+    "message": "Ngôn ngữ"
+  },
+  "langVi": {
+    "message": "Tiếng Việt"
+  },
+  "langEn": {
+    "message": "English"
+  },
+  "noNovels": {
+    "message": "Chưa có truyện nào trong kho."
+  },
+  "confirmDelete": {
+    "message": "Bạn có chắc chắn muốn xóa truyện này không?"
+  },
+  "pickerInstructions": {
+    "message": "Di chuột lên trang web và click chuột để chọn vùng nội dung. Bấm phím ESC để hủy."
+  }
+}

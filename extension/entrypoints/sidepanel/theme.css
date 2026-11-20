@@ -1,0 +1,282 @@
+/* ==========================================================================
+   Novel Scraper — Liquid Glass Kit Design System (Gradient 03 Edition)
+   Primary Gradient: #A77693 (Dusty Mauve) -> #174871 (Deep Prussian Blue)
+   Refractive 3D Specular Glassmorphism & Minimalist Ergonomics
+   ========================================================================== */
+
+:root {
+  --font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-serif: 'Merriweather', Georgia, serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Gradient 03 Core Palette */
+  --grad-rose: #A77693;
+  --grad-rose-bright: #C48EB0;
+  --grad-mid: #5E5F82;
+  --grad-ocean: #174871;
+  --grad-ocean-bright: #2B6CA3;
+  --liquid-teal: #4CC9B0;
+
+  /* Primary Liquid Gradients */
+  --gradient-03: linear-gradient(135deg, #A77693 0%, #5E5F82 50%, #174871 100%);
+  --gradient-03-vivid: linear-gradient(135deg, #B884A3 0%, #6B6A94 48%, #1E5A8A 100%);
+  --gradient-03-horizontal: linear-gradient(90deg, #A77693 0%, #6A688D 50%, #2B6CA3 100%);
+  --gradient-03-soft: linear-gradient(135deg, rgba(167, 118, 147, 0.28) 0%, rgba(94, 95, 130, 0.22) 50%, rgba(23, 72, 113, 0.32) 100%);
+
+  /* Dark Liquid Glass Theme (Default) */
+  --bg-base: #0B1320;
+  --bg-gradient:
+    radial-gradient(circle at 12% 8%, rgba(167, 118, 147, 0.32) 0%, transparent 48%),
+    radial-gradient(circle at 88% 22%, rgba(23, 72, 113, 0.42) 0%, transparent 52%),
+    radial-gradient(circle at 50% 92%, rgba(167, 118, 147, 0.18) 0%, transparent 50%),
+    linear-gradient(165deg, #161829 0%, #0F233A 55%, #0B1626 100%);
+  --bg-color: #0D1829;
+
+  /* Liquid Glass Surfaces */
+  --surface-glass: rgba(255, 255, 255, 0.065);
+  --surface-glass-card: rgba(255, 255, 255, 0.055);
+  --surface-glass-hover: rgba(255, 255, 255, 0.095);
+  --surface-glass-active: rgba(167, 118, 147, 0.22);
+  --surface-pill-well: rgba(8, 15, 28, 0.42);
+  --surface-input: rgba(10, 18, 32, 0.45);
+
+  /* Refractive Specular Borders & Highlights */
+  --border-subtle: rgba(255, 255, 255, 0.13);
+  --border-glass: rgba(255, 255, 255, 0.16);
+  --border-glass-strong: rgba(255, 255, 255, 0.28);
+  --border-glass-accent: rgba(196, 142, 176, 0.48);
+
+  --liquid-inner-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.32),
+    inset 0 -1px 2px rgba(255, 255, 255, 0.06);
+  --liquid-pill-shadow:
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.45),
+    inset 0 -2px 4px rgba(12, 24, 44, 0.35),
+    0 6px 16px -3px rgba(23, 72, 113, 0.45),
+    0 2px 6px rgba(167, 118, 147, 0.25);
+  --card-shadow:
+    0 14px 32px -8px rgba(5, 10, 20, 0.55),
+    inset 0 1px 1px rgba(255, 255, 255, 0.24),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.05);
+
+  /* Typography Colors */
+  --text-primary: #F8FAFC;
+  --text-secondary: #CBD5E1;
+  --text-muted: #8E9BAE;
+
+  /* Semantic & Accent Tokens (mapped cleanly for compatibility) */
+  --electric-blue: #C48EB0;
+  --azure-blue: #2B6CA3;
+  --midnight-blue: #0F2034;
+
+  --capsule-cream: rgba(255, 255, 255, 0.92);
+  --capsule-cream-text: #13253A;
+
+  --accent-cyan: #C48EB0;
+  --accent-indigo: #2B6CA3;
+  --accent-success: #4CC9B0;
+  --accent-warning: #F5B95F;
+  --accent-error: #F27474;
+
+  --glow-shadow: 0 6px 20px -3px rgba(167, 118, 147, 0.42);
+  --glow-cyan-sm: 0 0 14px -2px rgba(196, 142, 176, 0.4);
+
+  /* Liquid Radii */
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+}
+
+/* Light Liquid Glass Theme (Inspired by the bright frosted studio backdrop of Image 1) */
+[data-theme="light"] {
+  --bg-base: #EAE6EC;
+  --bg-gradient:
+    radial-gradient(circle at 15% 12%, rgba(167, 118, 147, 0.26) 0%, transparent 50%),
+    radial-gradient(circle at 85% 82%, rgba(23, 72, 113, 0.22) 0%, transparent 52%),
+    linear-gradient(160deg, #F3EEF2 0%, #E4EBF2 55%, #DCE5EE 100%);
+  --bg-color: #EAE6EC;
+
+  --surface-glass: rgba(255, 255, 255, 0.58);
+  --surface-glass-card: rgba(255, 255, 255, 0.52);
+  --surface-glass-hover: rgba(255, 255, 255, 0.78);
+  --surface-glass-active: rgba(167, 118, 147, 0.18);
+  --surface-pill-well: rgba(23, 72, 113, 0.07);
+  --surface-input: rgba(255, 255, 255, 0.82);
+
+  --border-subtle: rgba(255, 255, 255, 0.65);
+  --border-glass: rgba(255, 255, 255, 0.78);
+  --border-glass-strong: rgba(255, 255, 255, 0.95);
+  --border-glass-accent: rgba(167, 118, 147, 0.55);
+
+  --liquid-inner-shadow:
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.9),
+    inset 0 -1px 2px rgba(23, 72, 113, 0.08);
+  --liquid-pill-shadow:
+    inset 0 1.5px 2.5px rgba(255, 255, 255, 0.65),
+    inset 0 -2px 4px rgba(15, 35, 58, 0.25),
+    0 8px 18px -4px rgba(23, 72, 113, 0.32),
+    0 3px 8px rgba(167, 118, 147, 0.28);
+  --card-shadow:
+    0 14px 28px -6px rgba(23, 72, 113, 0.12),
+    0 4px 10px -2px rgba(167, 118, 147, 0.08),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.92),
+    inset 0 -1px 1.5px rgba(255, 255, 255, 0.45);
+
+  --text-primary: #142234;
+  --text-secondary: #3E5066;
+  --text-muted: #6C7D93;
+
+  --electric-blue: #8F5B7B;
+  --azure-blue: #174871;
+  --midnight-blue: #E6ECF2;
+
+  --capsule-cream: #FFFFFF;
+  --capsule-cream-text: #142234;
+
+  --accent-cyan: #8F5B7B;
+  --accent-indigo: #174871;
+  --accent-success: #169B82;
+  --accent-warning: #D9822B;
+  --accent-error: #D94848;
+
+  --glow-shadow: 0 8px 20px -4px rgba(167, 118, 147, 0.35);
+  --glow-cyan-sm: 0 4px 12px -2px rgba(167, 118, 147, 0.28);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background: var(--bg-gradient);
+  background-color: var(--bg-color);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  user-select: none;
+  font-size: 12.5px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Sleek Minimal Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(167, 118, 147, 0.28);
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(167, 118, 147, 0.55);
+}
+
+/* ==========================================================================
+   Liquid Glass Core Primitives
+   ========================================================================== */
+
+/* Refractive Liquid Glass Panel */
+.glass-panel {
+  background: var(--surface-glass);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid var(--border-glass);
+  box-shadow: var(--card-shadow);
+  border-radius: var(--radius-md);
+}
+
+/* Refractive Liquid Glass Card */
+.glass-card {
+  background: var(--surface-glass-card);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  border: 1px solid var(--border-glass);
+  box-shadow: var(--card-shadow);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  border-color: var(--border-glass-accent);
+  background: var(--surface-glass-hover);
+  transform: translateY(-1px);
+}
+
+/* Gradient 03 Text */
+.text-gradient-cyan {
+  background: var(--gradient-03-horizontal);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Liquid Glass Capsule Buttons */
+.btn-capsule {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 6px 13px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--border-glass);
+  background: var(--surface-glass-card);
+  box-shadow: var(--liquid-inner-shadow);
+  color: var(--text-primary);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.btn-capsule:hover {
+  background: var(--surface-glass-hover);
+  border-color: var(--border-glass-accent);
+  box-shadow: var(--liquid-inner-shadow), var(--glow-cyan-sm);
+  transform: translateY(-0.5px);
+}
+
+.btn-capsule.active,
+.btn-capsule.primary,
+.btn-capsule.electric {
+  background: var(--gradient-03-vivid);
+  color: #FFFFFF;
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: var(--liquid-pill-shadow);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.btn-capsule.active:hover,
+.btn-capsule.primary:hover,
+.btn-capsule.electric:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.btn-capsule:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Pulse dot animation */
+@keyframes pulse-dot {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.4); opacity: 0.2; }
+  100% { transform: scale(0.9); opacity: 0.8; }
+}
